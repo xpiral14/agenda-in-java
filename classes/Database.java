@@ -171,7 +171,8 @@ public class Database {
     }
 
     public static void buscaPessoaPorCod(String cod, String caminho) {
-        FileReader arquivoBancoDeDados = new FileReader(caminho);
+        try{
+            FileReader arquivoBancoDeDados = new FileReader(caminho);
         BufferedReader bancoDeDados = new BufferedReader(arquivoBancoDeDados);
 
         String linha = bancoDeDados.readLine();
@@ -186,6 +187,11 @@ public class Database {
         }
         arquivoBancoDeDados.close();
         bancoDeDados.close();
+        }catch(IOException e){
+            String arquivo = caminho.split("/")[caminho.split("/").length];
+
+            System.out.println("arquivo " + arquivo + " nao encontrado");
+        }
     }
 
     // método que serve para carregar os dados do 'banco de dados' caso existam para
